@@ -6,8 +6,7 @@ type RestOptions = {
     method: 'GET' | 'DELETE',
     headers: {
         'Content-Type': 'application/json'
-    },
-    body: null;
+    }
 } | {
     method: 'POST' | 'PUT',
     headers: {
@@ -22,8 +21,7 @@ export abstract class BaseService<T extends WithID> implements CrudService<T> {
         method: "GET",
         headers: {
             'Content-Type': 'application/json'
-        },
-        body: null
+        }
     };
 
     constructor(public endpoint: `${URL}/${string}s`) { }
@@ -37,6 +35,13 @@ export abstract class BaseService<T extends WithID> implements CrudService<T> {
             .then(data => ({ status: "ACCEPTED", data }))
     }
 
+    //overloads
+    /**
+     * @example
+     * userService.read().then( res => console.log(res.data) )
+     */
+    read(): Promise<CrudServiceResponse<T[]>> 
+    read(target: T): Promise<CrudServiceResponse<T>> 
     read(target?: T | undefined): Promise<CrudServiceResponse<T | T[]>> {
 
         const url = target ? `${this.endpoint}/${target.id}` : this.endpoint;

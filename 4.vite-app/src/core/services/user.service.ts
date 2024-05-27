@@ -12,4 +12,3 @@ export class UserService extends BaseService<User> {
 }
 
 
-const u = new UserService('https://120.0.0.1/users')
