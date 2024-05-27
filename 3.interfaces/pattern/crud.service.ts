@@ -1,5 +1,6 @@
+import { WithID } from "../interfaces/system.types";
 
-import { WithID } from "./system.types";
+
 
 export interface CrudServiceResponse<T>{
     data:T;
@@ -10,7 +11,7 @@ export interface CrudServiceResponse<T>{
 
 export interface CrudService<Entity extends WithID>{
 
-    constructor(endpoint:URL);
+   
     
     create(target:Omit<Entity, 'id'>):Promise<CrudServiceResponse<Entity>>;
 
